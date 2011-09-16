@@ -1,0 +1,38 @@
+### CSV to RDF converter
+### Ruby script g
+
+# Purpose: Convert comma-separated table to semantic markup using headers as properties
+# Creator: Benjamin Rokseth
+# Date: 15.09.2011
+
+## FILES ##
+csv2rdf.rb                            -- main ruby script to convert NORMARC file to RDF
+
+## FEATURES ##
+takes csv and uses column headers as properties
+first column is used as resource id, using base_uri from command line
+rdf type given in command line
+output can be .nt .rdf or .n3
+
+## REQUIREMENTS ##
+ruby >= 1.8.7
+rdf.rb (thanks to Arto Bendiken et.al. for the brilliant RDF library for ruby)
+rdf-rdfxml.rb (for rdf-xml output, requires development libraries libxml2 and libxslt1)
+rdf-n3.rb (for n3 output)
+
+## UBUNTU INSTALL ##
+(for rdf-xml support)
+sudo apt-get install libxml2-dev libxslt1-dev
+gem install rdf rdf-rdfxml rdf-n3
+
+## USAGE ##
+csv2rdf.rb  -i input_file.csv -o output_file -b base_uri -t rdf_type [-r recordlimit]
+  -i input_file must be comma-separated file
+  -o output_file extension can be either .rdf (slooow) .n3 (sloow) or .nt (very fast)
+  -b base_uri must be uri
+  -t rdf_type must be uri
+  -r [number] stops processing after given number of records
+  
+## EXAMPLE ##
+
+ruby csv2rdf.rb -i input.csv -b http://example.com/bookreviews/ -t http://purl.org/stuff/rev#Review -o output.rdf
