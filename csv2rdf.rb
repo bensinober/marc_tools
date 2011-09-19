@@ -1,7 +1,13 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-require 'csv'
+if RUBY_VERSION < "1.9" 
+  require "rubygems" 
+  require "faster_csv" 
+  CSV = FCSV 
+else 
+  require "csv" 
+end 
 require 'rdf'
 require 'rdf/rdfxml'
 require 'rdf/n3'
@@ -49,8 +55,6 @@ class RDFModeler
   def construct_uri
     @uri = RDF::URI.intern($base_uri)
     id = "#{@record}"
-
-    #id = "#{@record[headers[0]]}"
     id.gsub!(/[^\w\s\-ÆØÅæøå]/,"")
     id.gsub!(/\s/,"_")
     @uri += id
@@ -74,24 +78,27 @@ end
   
 count = 0
 
-csv = CSV.read($input_file)
-headers = csv.shift.map {|i| i.to_s }
-string_data = csv.map {|row| row.map {|cell| cell.to_s } }
-array_of_hashes = string_data.map {|row| Hash[*headers.zip(row).flatten] }
+csv = CSV.read($input_file, {:headers => true, :encoding => 'UTF-8'})
 # start writer handle
 RDF::Writer.open($output_file) do | writer |
 @@writer = writer
 
-  array_of_hashes.each do | record |
+  csv.each do | record |
     count += 1
     if $recordlimit then break if count > $recordlimit end
       # take the content of the first column to make record id
-      rdfrecord = RDFModeler.new(record["#{headers[0]}"])
+      rdfrecord = RDFModeler.new(record[0])
       rdfrecord.set_type(RDF::URI($rdf_type))
       record.each do |k,v| 
-        unless v.empty?
+        unless v.nil?
           v.strip_leading_and_trailing_punct
-          rdfrecord.assert(RDF::URI(k), RDF::Literal("#{v}"))
+          if v =~ /^http/
+            rdfrecord.assert(RDF::URI(k), RDF::URI("#{v}"))
+          elsif v =~ /^[\d]+$/
+            rdfrecord.assert(RDF::URI(k), RDF::Literal("#{v}", :datatype => RDF::XSD.integer))
+          else
+            rdfrecord.assert(RDF::URI(k), v)
+          end
         end
       end 
     

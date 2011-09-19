@@ -6,7 +6,9 @@
 # Date: 15.09.2011
 
 ## FILES ##
-csv2rdf.rb                            -- main ruby script to convert NORMARC file to RDF
+csv2rdf.rb        -- main ruby script to convert NORMARC file to RDF
+example.csv       -- example table
+example.rdf       -- example output
 
 ## FEATURES ##
 takes csv and uses column headers as properties
@@ -23,7 +25,7 @@ rdf-n3.rb (for n3 output)
 ## UBUNTU INSTALL ##
 (for rdf-xml support)
 sudo apt-get install libxml2-dev libxslt1-dev
-gem install rdf rdf-rdfxml rdf-n3
+gem install rdf rdf-rdfxml rdf-n3 (csv if ruby < 1.9)
 
 ## USAGE ##
 csv2rdf.rb  -i input_file.csv -o output_file -b base_uri -t rdf_type [-r recordlimit]
@@ -35,4 +37,4 @@ csv2rdf.rb  -i input_file.csv -o output_file -b base_uri -t rdf_type [-r recordl
   
 ## EXAMPLE ##
 
-ruby csv2rdf.rb -i input.csv -b http://example.com/bookreviews/ -t http://purl.org/stuff/rev#Review -o output.rdf
+ruby csv2rdf.rb -i example.csv -b http://example.com/bookreviews/ -t http://purl.org/stuff/rev#Review -o example.rdf
