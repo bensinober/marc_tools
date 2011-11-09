@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rdf:RDF xmlns:ns3="http://rdvocab.info/Elements/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:ns0="http://purl.org/stuff/rev#" xmlns:ns1="http://purl.org/dc/terms/" xmlns:ns2="http://purl.org/ontology/bibo/">
-  <ns0:Review rdf:about="http://example.com/bookreviews/Hente_Joel">
+<rdf:RDF xmlns:ns2="http://purl.org/ontology/bibo/" xmlns:ns3="http://rdvocab.info/Elements/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:ns0="http://purl.org/stuff/rev#" xmlns:ns1="http://purl.org/dc/terms/">
+  <ns0:Review rdf:about="http://example.com/bookreviews/HenteJoel">
     <ns1:audience>Førskole</ns1:audience>
     <ns1:creator>Adbåge, Emma</ns1:creator>
     <ns1:issued>2007-04-26</ns1:issued>
     <ns1:modified>2007-04-26</ns1:modified>
     <ns2:illustrator>Adbåge, Emma</ns2:illustrator>
     <ns0:reviewer>Hoppsalong Hebert</ns0:reviewer>
-    <ns0:text>Dette er en bildebok fra barnehagemiljø. Den er likevel aktuell i småskolen siden den tar opp adopsjon. Det er kjent og aktuelt for mange barn. </ns0:text>
+    <ns0:text xml:lang="nb">Dette er en bildebok fra barnehagemiljø. Den er likevel aktuell i småskolen siden den tar opp adopsjon. Det er kjent og aktuelt for mange barn. </ns0:text>
     <ns0:title>Hente Joel</ns0:title>
     <ns0:type>Billedbok</ns0:type>
-    <ns3:dateOfProduction>2006</ns3:dateOfProduction>
+    <ns3:dateOfProduction rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2006</ns3:dateOfProduction>
   </ns0:Review>
-  <ns0:Review rdf:about="http://example.com/bookreviews/Tre_små_hekser">
+  <ns0:Review rdf:about="http://example.com/bookreviews/Tresmaahekser">
     <ns1:audience>Småtrinnet</ns1:audience>
     <ns1:creator>Adams, Georgie</ns1:creator>
     <ns1:issued>2002-10-29</ns1:issued>
@@ -20,23 +20,12 @@
     <ns2:illustrator>Bolam, Emily</ns2:illustrator>
     <ns0:Comment>Magiske vesner, hekser, Halloween, lettlest, humor, høytlesning, mest for jenter på småtrinnet som har begynt å lese selv - og høytlesning fra 5-årsalderen</ns0:Comment>
     <ns0:reviewer>Hvem Da</ns0:reviewer>
-    <ns0:text>Zara, Zigrid og Zofie bor i Magiskogen. De går på skolen med vennene sine, litt komplisert er det fordi skolen flytter seg hele tiden, de rydder hus, flyr på sopelime, lager mat - og arrangerer Halloweenfest. Alt går med magi og tryllekunster selv om det ikke alltid er vellykket ved første forsøk.</ns0:text>
+    <ns0:text xml:lang="nb">Zara, Zigrid og Zofie bor i Magiskogen. De går på skolen med vennene sine, litt komplisert er det fordi skolen flytter seg hele tiden, de rydder hus, flyr på sopelime, lager mat - og arrangerer Halloweenfest. Alt går med magi og tryllekunster selv om det ikke alltid er vellykket ved første forsøk.</ns0:text>
     <ns0:title>Tre små hekser</ns0:title>
     <ns0:type>Roman</ns0:type>
-    <ns3:dateOfProduction>2002</ns3:dateOfProduction>
+    <ns3:dateOfProduction rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2002</ns3:dateOfProduction>
   </ns0:Review>
-  <ns0:Review rdf:about="http://example.com/bookreviews/Haikerens_guide_til_Galaksen">
-    <ns1:audience>Ungdomstrinnet</ns1:audience>
-    <ns1:creator>Adams, Douglas</ns1:creator>
-    <ns1:modified>2002-11-24</ns1:modified>
-    <ns0:Comment>Ungdom/ gutterIkke spesielt lettlest men med "guttehumor".Kan brukes på gutter som ikke leser noe særlig, men krever nok en viss leseferdighet.</ns0:Comment>
-    <ns0:reviewer>Anonymisert Person</ns0:reviewer>
-    <ns0:text>Handler i korthet om en ung mann og dennes kamerat som faktisk er innvandret fra verdensrommet. Vår jord blir slettet og på mirakuløst vis blir våre to helter reddet. </ns0:text>
-    <ns0:title>Haikerens guide til Galaksen</ns0:title>
-    <ns0:type>Roman</ns0:type>
-    <ns3:dateOfProduction>1998</ns3:dateOfProduction>
-  </ns0:Review>
-  <ns0:Review rdf:about="http://example.com/bookreviews/En_tid_for_alt">
+  <ns0:Review rdf:about="http://example.com/bookreviews/Entidforalt">
     <ns1:audience>Voksen</ns1:audience>
     <ns1:creator>Knausgård, Karl Ove</ns1:creator>
     <ns1:issued>2005-05-16</ns1:issued>
@@ -44,9 +33,20 @@
     <ns0:Comment>Kommentar til anmeldelsen</ns0:Comment>
     <ns0:Feedback>Kjempebra anmeldelse!</ns0:Feedback>
     <ns0:reviewer>Heisann Pedersen</ns0:reviewer>
-    <ns0:text>Dette er en fake bokanmeldelse for en tid for alt</ns0:text>
+    <ns0:text xml:lang="nb">Dette er en fake bokanmeldelse for en tid for alt</ns0:text>
     <ns0:title>En tid for alt</ns0:title>
     <ns0:type>Roman</ns0:type>
-    <ns3:dateOfProduction>1999</ns3:dateOfProduction>
+    <ns3:dateOfProduction rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1999</ns3:dateOfProduction>
+  </ns0:Review>
+  <ns0:Review rdf:about="http://example.com/bookreviews/HaikerensguidetilGalaksen">
+    <ns1:audience>Ungdomstrinnet</ns1:audience>
+    <ns1:creator>Adams, Douglas</ns1:creator>
+    <ns1:modified>2002-11-24</ns1:modified>
+    <ns0:Comment>Ungdom/ gutterIkke spesielt lettlest men med "guttehumor".Kan brukes på gutter som ikke leser noe særlig, men krever nok en viss leseferdighet.</ns0:Comment>
+    <ns0:reviewer>Anonymisert Person</ns0:reviewer>
+    <ns0:text xml:lang="nb">Handler i korthet om en ung mann og dennes kamerat som faktisk er innvandret fra verdensrommet. Vår jord blir slettet og på mirakuløst vis blir våre to helter reddet. </ns0:text>
+    <ns0:title>Haikerens guide til Galaksen</ns0:title>
+    <ns0:type>Roman</ns0:type>
+    <ns3:dateOfProduction rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1998</ns3:dateOfProduction>
   </ns0:Review>
 </rdf:RDF>

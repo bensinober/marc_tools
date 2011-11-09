@@ -1,13 +1,14 @@
 #!/usr/bin/env ruby
+# coding:utf-8
 
 require 'rubygems'
 if RUBY_VERSION < "1.9" 
-  require "rubygems" 
   require "faster_csv" 
   CSV = FCSV 
 else 
   require "csv" 
 end 
+require 'uri'
 require 'rdf'
 require 'rdf/rdfxml'
 require 'rdf/n3'
@@ -26,12 +27,12 @@ def usage(s)
 end
 
 loop { case ARGV[0]
-    when '-i':  ARGV.shift; $input_file  = ARGV.shift
-    when '-o':  ARGV.shift; $output_file = ARGV.shift
-    when '-b':  ARGV.shift; $base_uri    = ARGV.shift
-    when '-t':  ARGV.shift; $rdf_type    = ARGV.shift
-    when '-r':  ARGV.shift; $recordlimit = ARGV.shift.to_i # force integer
-    when /^-/:  usage("Unknown option: #{ARGV[0].inspect}")
+    when '-i' then  ARGV.shift; $input_file  = ARGV.shift
+    when '-o' then  ARGV.shift; $output_file = ARGV.shift
+    when '-b' then  ARGV.shift; $base_uri    = ARGV.shift
+    when '-t' then  ARGV.shift; $rdf_type    = ARGV.shift
+    when '-r' then  ARGV.shift; $recordlimit = ARGV.shift.to_i # force integer
+    when /^-/ then  usage("Unknown option: #{ARGV[0].inspect}")
     else 
       if !$input_file || !$output_file || !$base_uri || !$rdf_type then usage("Missing argument!\n") end
     break
@@ -54,9 +55,10 @@ class RDFModeler
   
   def construct_uri
     @uri = RDF::URI.intern($base_uri)
+    subs = {'Æ' => 'Ae', 'Ø' => 'Oe', 'Å' => 'Aa', 'æ' => 'ae', 'ø' => 'oe', 'å' => 'aa', 'Ä' => 'Ae', 'Ö' => 'Oe', 'ä' => 'ae', 'ö' => 'oe'}
     id = "#{@record}"
-    id.gsub!(/[^\w\s\-ÆØÅæøå]/,"")
-    id.gsub!(/\s/,"_")
+    id.gsub!(/Å|Ø|Æ|å|ø|æ|Ä|Ö|ä|ö|\ |[éèêẽ]|[áàâã]|[íìîĩ]|[óòôõ]|[úùûũ]/) { |match| subs[match] }
+    id.gsub!(/[\W]+/,"")
     @uri += id
   end
   
@@ -90,12 +92,21 @@ RDF::Writer.open($output_file) do | writer |
       rdfrecord = RDFModeler.new(record[0])
       rdfrecord.set_type(RDF::URI($rdf_type))
       record.each do |k,v| 
+      # k - headers, v - content
         unless v.nil?
           v.strip_leading_and_trailing_punct
+          # content starts with http - make URI
           if v =~ /^http/
             rdfrecord.assert(RDF::URI(k), RDF::URI("#{v}"))
+          # content contains only digits, make integer
           elsif v =~ /^[\d]+$/
             rdfrecord.assert(RDF::URI(k), RDF::Literal("#{v}", :datatype => RDF::XSD.integer))
+          ### special cases can be entered below ###
+          elsif k == "http://purl.org/stuff/rev#text"
+            rdfrecord.assert(RDF::URI(k), RDF::Literal("#{v}", :language => :nb))
+          elsif k == "CommentAltLanguage"
+            rdfrecord.assert(RDF::URI("http://purl.org/stuff/rev#text"), RDF::Literal("#{v}", :language => :nn))
+          ### end special cases ###
           else
             rdfrecord.assert(RDF::URI(k), v)
           end
