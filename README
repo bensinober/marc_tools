@@ -1,12 +1,11 @@
 ### MARCTOOLS - Collection of MARC conversion tools
-### Ruby scripts
+### Ruby and Perl scripts
 
-# Purpose: Convert comma-separated table to semantic markup using headers as properties
 # Creator: Benjamin Rokseth
 # Date: 15.11.2011
 
 ##########
-## csv2rdf.rb -- ruby script to convert NORMARC file to RDF
+## csv2rdf.rb -- ruby script to Convert comma-separated table to semantic markup using headers as properties
 ##########
 
 ## FEATURES ##
@@ -33,9 +32,14 @@ ruby csv2rdf.rb -i example.csv -b http://example.com/bookreviews/ -t http://purl
 Usage: ruby marc2csv.rb -i input_file.mrc -o output_file.csv [-r recordlimit]
 
 ##########
-## marc2csv.rb -- ruby script to convert NORMARC file to CSV
+## marcfix.pl  -- Perl script removes breaking 000 fields from NORMARC
+##########
+Usage: perl marcfix.pl inputfile.mrc > outputfile.mrc
+
+##########
+## marc2csv.rb -- ruby script to convert NORMARC binary file to CSV
 ########## 
-Usage: ruby marc2xml.rb InputFile.mrc [OutputFile.xml]\n"
+Usage: ruby marc2xml.rb InputFile.mrc [OutputFile.csv]\n"
   
 ## REQUIREMENTS ##
 ruby >= 1.8.7
