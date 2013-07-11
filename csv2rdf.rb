@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# coding:utf-8
+# encoding:utf-8
 
 require 'rubygems'
 if RUBY_VERSION < "1.9" 
@@ -20,6 +20,7 @@ def usage(s)
     $stderr.puts("#{File.basename($0)} -i input_file.csv -o output_file -b base_uri -t rdf_type [-r recordlimit]\n")
     $stderr.puts("  -i input_file must be comma-separated file\n")
     $stderr.puts("  -o output_file extension can be either .rdf (slooow) .n3 (sloow) or .nt (very fast)\n")
+    $stderr.puts("  -s 'separator' column separator")
     $stderr.puts("  -b base_uri must be uri\n")
     $stderr.puts("  -t rdf_type must be uri\n")    
     $stderr.puts("  -r [number] stops processing after given number of records\n")
@@ -29,7 +30,8 @@ end
 loop { case ARGV[0]
     when '-i' then  ARGV.shift; $input_file  = ARGV.shift
     when '-o' then  ARGV.shift; $output_file = ARGV.shift
-    when '-b' then  ARGV.shift; $base_uri    = ARGV.shift
+    when '-s' then  ARGV.shift; $separator   = ARGV.shift ||= ","
+    when '-b' then  ARGV.shift; $base_uri    = ARGV.shift 
     when '-t' then  ARGV.shift; $rdf_type    = ARGV.shift
     when '-r' then  ARGV.shift; $recordlimit = ARGV.shift.to_i # force integer
     when /^-/ then  usage("Unknown option: #{ARGV[0].inspect}")
@@ -80,7 +82,7 @@ end
   
 count = 0
 
-csv = CSV.read($input_file, {:headers => true, :encoding => 'UTF-8'})
+csv = CSV.read($input_file, {:headers => true, :encoding => 'UTF-8', :col_sep => $separator})
 # start writer handle
 RDF::Writer.open($output_file) do | writer |
 @@writer = writer

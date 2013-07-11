@@ -39,7 +39,7 @@ Usage: perl marcfix.pl inputfile.mrc > outputfile.mrc
 ##########
 ## marc2csv.rb -- ruby script to convert NORMARC binary file to CSV
 ########## 
-Usage: ruby marc2xml.rb InputFile.mrc [OutputFile.csv]\n"
+Usage: ruby marc2xml.rb -i InputFile.mrc [-o OutputFile.csv] [-r recordlimit]\n"
   
 ## REQUIREMENTS ##
 ruby >= 1.8.7

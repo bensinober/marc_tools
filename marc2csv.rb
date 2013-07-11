@@ -34,8 +34,9 @@ count = 0
 
 # reading records from a batch file
 reader = MARC::Reader.new($input_file)
-csv = CSV.open($output_file, "wb:ASCII-8BIT:UTF-8", {:headers => true, :write_headers => true, :quote_char => '"', :col_sep =>',', :force_quotes => true})
-  
+
+#csv = CSV.open($output_file, "wb:ASCII-8BIT:UTF-8", {:headers => true, :write_headers => true, :quote_char => '"', :col_sep =>',', :force_quotes => true})
+csv = CSV.open($output_file, "wb:UTF-8", {:headers => true, :write_headers => true, :quote_char => '"', :col_sep =>',', :force_quotes => true})
 
 marc_tags = []
 marc_tagandsubfields = []
